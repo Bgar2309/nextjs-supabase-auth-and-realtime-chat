@@ -2,6 +2,8 @@ import './globals.css'
 import SupabaseListener from '@/components/supabaseListener'
 import Sidebar from '@/components/sidebar'
 
+export const dynamic = 'force-dynamic'
+
 export default function RootLayout({
   children,
 }: {
