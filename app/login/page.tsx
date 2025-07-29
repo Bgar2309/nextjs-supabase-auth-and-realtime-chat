@@ -1,13 +1,13 @@
 "use client"
 
 import SignInForm from '@/components/modal/signinForm'
-import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { createPagesBrowserClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 
 export default function LoginPage() {
   const router = useRouter()
-  const supabaseRef = useRef(createBrowserSupabaseClient())
+  const supabaseRef = useRef(createPagesBrowserClient())
 
   useEffect(() => {
     const checkSession = async () => {
