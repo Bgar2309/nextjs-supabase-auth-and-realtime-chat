@@ -59,7 +59,7 @@ const MyPage = () => {
   return (
     <div className="mx-auto max-w-xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32">
       <h1 className="text-2xl font-bold">
-        ログインに成功しました
+        Connexion réussie
       </h1>
       <div className="pt-10">
         <form onSubmit={onChangeName}>
@@ -67,7 +67,7 @@ const MyPage = () => {
             htmlFor="name"
             className="block mb-2 text-sm text-left font-medium text-gray-900"
           >
-            名前
+            Nom
           </label>
           <div className="flex w-full">
             <input
@@ -75,7 +75,7 @@ const MyPage = () => {
               name="name"
               id="name"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              placeholder="山田 太郎"
+              placeholder="Jean Dupont"
               onChange={(e) => setName(e.target.value)}
               value={name}
               required
@@ -84,7 +84,7 @@ const MyPage = () => {
               className="ml-2 min-w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               type="submit"
             >
-              更新
+              Mettre à jour
             </button>
           </div>
         </form>
@@ -95,7 +95,7 @@ const MyPage = () => {
             className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             type="submit"
           >
-            ログアウト
+            Se déconnecter
           </button>
         </form>
       </div>

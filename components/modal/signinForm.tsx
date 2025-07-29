@@ -12,7 +12,7 @@ export default function SignInForm(props: {
           htmlFor="email"
           className="block mb-2 text-sm font-medium text-gray-900"
         >
-          メールアドレス
+          Adresse e-mail
         </label>
         <input
           type="email"
@@ -28,7 +28,7 @@ export default function SignInForm(props: {
           htmlFor="password"
           className="block mb-2 text-sm font-medium text-gray-900"
         >
-          パスワード
+          Mot de passe
         </label>
         <input
           type="password"
@@ -40,11 +40,11 @@ export default function SignInForm(props: {
         />
       </div>
       <div className="text-right">
-        <Link className="font-medium text-blue-600 dark:text-blue-500 hover:underline" href={`${location.origin}/resetPassword`} onClick={() => showModal(false)}>パスワードを忘れた場合</Link>
+<Link className="font-medium text-blue-600 dark:text-blue-500 hover:underline" href={`${location.origin}/resetPassword`} onClick={() => showModal(false)}>Mot de passe oublié ?</Link>
       </div>
       <div>
         <button className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-          サインイン
+          Se connecter
         </button>
       </div>
     </form>

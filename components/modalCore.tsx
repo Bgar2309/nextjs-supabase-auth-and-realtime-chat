@@ -11,16 +11,16 @@ const ModalCore = ({ modalType }: Props) => {
   const [showModal, setShowModal] = useState(false);
   let title = "";
   let headerButton = "";
-  let formElement = <p>フォームを読み込めませんでした。</p>;
+  let formElement = <p>Impossible de charger le formulaire.</p>;
   switch (modalType) {
     case ModalType.SignIn:
-      title = "ログインフォーム";
+      title = "Formulaire de connexion";
       headerButton = "Login";
       formElement = <SignInForm showModal={setShowModal}></SignInForm>;
       break;
 
     case ModalType.SignUp:
-      title = "ユーザ登録フォーム";
+      title = "Formulaire d'inscription";
       headerButton = "Sign Up";
       formElement = <SignUpForm showModal={setShowModal}></SignUpForm>;
       break;
@@ -64,7 +64,7 @@ const ModalCore = ({ modalType }: Props) => {
                         d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                       />
                     </svg>
-                    <span className="sr-only">モーダルを閉じる</span>
+                    <span className="sr-only">Fermer la fenêtre</span>
                   </button>
                 </div>
                 <div className="p-4 md:p-5">{formElement}</div>
