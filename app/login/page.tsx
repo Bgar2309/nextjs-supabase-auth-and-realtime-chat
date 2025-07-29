@@ -1,17 +1,26 @@
+"use client"
+
 import SignInForm from '@/components/modal/signinForm'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
-export default async function LoginPage() {
-  const supabase = createServerComponentClient({ cookies })
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
+export default function LoginPage() {
+  const router = useRouter()
+  const supabase = createClientComponentClient()
 
-  if (session) {
-    redirect('/profile')
-  }
+  useEffect(() => {
+    const checkSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession()
+      if (session) {
+        router.replace('/profile')
+      }
+    }
+
+    checkSession()
+  }, [router, supabase])
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4">
