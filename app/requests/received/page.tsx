@@ -17,11 +17,22 @@ export default function ReceivedRequestsPage() {
   useEffect(() => {
     let subscription: any
     const subscribe = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
       if (!user) return
       subscription = supabase
-        .from(`requests:receiver_id=eq.${user.id}`)
-        .on('INSERT', () => showToast('Nouvelle demande reçue'))
+        .channel('requests')
+        .on(
+          'postgres_changes',
+          {
+            event: 'INSERT',
+            schema: 'public',
+            table: 'requests',
+            filter: `receiver_id=eq.${user.id}`,
+          },
+          () => showToast('Nouvelle demande reçue')
+        )
         .subscribe()
     }
     subscribe()
