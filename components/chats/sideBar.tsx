@@ -14,7 +14,13 @@ export default function SideBar(
   props: Props
 ) {
   const { profiles, setProfiles, handleClick } = props
-  const supabase = createClientComponentClient()
+  const canUseSupabase =
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  const supabase = canUseSupabase ? createClientComponentClient() : null
+  if (!supabase) {
+    return null
+  }
 
   const [selectedId, setSelectedId] = useState("");
 

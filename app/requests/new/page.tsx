@@ -4,7 +4,13 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { useRouter } from "next/navigation"
 
 export default function NewRequest() {
-  const supabase = createClientComponentClient()
+  const canUseSupabase =
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  const supabase = canUseSupabase ? createClientComponentClient() : null
+  if (!supabase) {
+    return <div>Supabase not configured</div>
+  }
   const router = useRouter()
 
   const [title, setTitle] = useState("")

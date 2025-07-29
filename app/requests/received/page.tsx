@@ -7,7 +7,13 @@ import { useEffect } from 'react'
 
 export default function ReceivedRequestsPage() {
   const { data: requests, error, loading } = useReceivedRequests()
-  const supabase = createClientComponentClient()
+  const canUseSupabase =
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  const supabase = canUseSupabase ? createClientComponentClient() : null
+  if (!supabase) {
+    return <div>Supabase not configured</div>
+  }
   const router = useRouter()
 
   const showToast = (message: string) => {

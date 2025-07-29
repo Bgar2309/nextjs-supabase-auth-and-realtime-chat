@@ -7,7 +7,13 @@ import { useEffect, useState } from "react";
  * ログイン後のマイページ
  */
 const MyPage = () => {
-  const supabase = createClientComponentClient();
+  const canUseSupabase =
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  const supabase = canUseSupabase ? createClientComponentClient() : null
+  if (!supabase) {
+    return <div>Supabase not configured</div>
+  }
   const [name, setName] = useState("");
   const [userID, setUserID] = useState("");
 

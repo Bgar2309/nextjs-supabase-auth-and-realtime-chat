@@ -1,0 +1,39 @@
+"use client"
+
+import SignInForm from '@/components/modal/signinForm'
+import { createPagesBrowserClient } from '@supabase/auth-helpers-nextjs'
+import { useRouter } from 'next/navigation'
+import { useEffect, useRef } from 'react'
+
+export default function LoginPage() {
+  const router = useRouter()
+  const supabaseRef = useRef<ReturnType<typeof createPagesBrowserClient> | null>(null)
+
+  useEffect(() => {
+    if (
+      process.env.NEXT_PUBLIC_SUPABASE_URL &&
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    ) {
+      supabaseRef.current = createPagesBrowserClient()
+      const checkSession = async () => {
+        const {
+          data: { session },
+        } = await supabaseRef.current!.auth.getSession()
+        if (session) {
+          router.replace('/profile')
+        }
+      }
+
+      checkSession()
+    }
+  }, [router])
+
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center p-4">
+      <h1 className="text-2xl font-bold mb-6">Connectez-vous</h1>
+      <div className="w-full max-w-md">
+        <SignInForm showModal={() => {}} />
+      </div>
+    </div>
+  )
+}

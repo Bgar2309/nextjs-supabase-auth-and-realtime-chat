@@ -15,6 +15,9 @@ export default function SignUpForm(props: {
     event.preventDefault();
     showModal(false);
     try {
+      if (!supabase) {
+        throw new Error('Supabase credentials missing');
+      }
       const { error: signUpError } = await supabase.auth.signUp({
         email: email,
         password: password,

@@ -6,7 +6,13 @@ import { useEffect, useRef, useState } from "react"
 import ChatUI from '@/components/chats/chatUI';
 
 export default function Chats() {
-  const supabase = createClientComponentClient()
+  const canUseSupabase =
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  const supabase = canUseSupabase ? createClientComponentClient() : null
+  if (!supabase) {
+    return <div>Supabase not configured</div>
+  }
   const [userID, setUserID] = useState("")
   const [currentToID, setCurrentToID] = useState("")
   const [profiles, setProfiles] = useState<Database["public"]["Tables"]["profiles"]["Row"][]>([])
