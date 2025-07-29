@@ -4,7 +4,7 @@ import { AuthError } from '@supabase/supabase-js';
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 /**
- * パスワードリセット用画面
+ * Écran de réinitialisation du mot de passe
  */
 const InputPasswordForReset = () => {
   const [password, setPassword] = useState("");
@@ -30,7 +30,7 @@ const InputPasswordForReset = () => {
   if (error) {
     return (
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32">
-             <p>エラーが発生しました</p>
+             <p>Une erreur est survenue</p>
         </div>
     )
   }
@@ -38,21 +38,21 @@ const InputPasswordForReset = () => {
   if (isSend) {
     return (
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32">
-             <p>パスワードを更新しました</p>
+             <p>Mot de passe mis à jour</p>
         </div>
     )
   }
   
   return (
     <div className="mx-auto max-w-7xl md:w-1/2 lg:w-1/4 px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32">
-     <p>新しいパスワードを入力してください</p>
+     <p>Veuillez saisir le nouveau mot de passe</p>
      <form className="pt-10 text-left" onSubmit={onSubmit}>
         <div>
             <label
             htmlFor="password"
             className="block mb-2 text-sm font-medium text-gray-900"
             >
-            パスワード
+            Mot de passe
             </label>
             <input
             type="password"
@@ -70,7 +70,7 @@ const InputPasswordForReset = () => {
           htmlFor="passwordConf"
           className="block mb-2 text-sm font-medium text-gray-900"
         >
-          パスワード（確認）
+          Mot de passe (confirmation)
         </label>
         <input
           type="password"
@@ -85,7 +85,7 @@ const InputPasswordForReset = () => {
         </div>
         <div className='text-center mt-5'>
         <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 text-center"
-         type="submit">送信</button>
+         type="submit">Envoyer</button>
 
         </div>
       </form>

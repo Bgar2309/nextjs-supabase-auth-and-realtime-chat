@@ -22,7 +22,7 @@ export default function ChatUI(props: Props) {
         </div>
         <p className='text-gray-500 font-normal text-xs truncate text-right w-full'>
           <DateFormatter timestamp={item.created_at} />
-          <span className='isAlreadyRead'>{item.isMyMessage && item.isAlreadyRead ? "既読" : ""}</span>
+          <span className='isAlreadyRead'>{item.isMyMessage && item.isAlreadyRead ? "Lu" : ""}</span>
         </p>
       </div>
     </>

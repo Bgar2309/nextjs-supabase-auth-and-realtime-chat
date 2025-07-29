@@ -16,7 +16,7 @@ export default function NewRequest() {
     try {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) {
-        alert("ログインしてください")
+        alert("Veuillez vous connecter")
         return
       }
       const { error } = await supabase.from('requests').insert({
@@ -27,11 +27,11 @@ export default function NewRequest() {
         organization_id: (user as any).user_metadata.org_id,
       })
       if (error) throw error
-      alert("送信しました")
+      alert("Envoyé")
       router.push('/requests/sent')
     } catch (error) {
       console.error(error)
-      alert("エラーが発生しました")
+      alert("Une erreur est survenue")
     }
   }
 
@@ -74,7 +74,7 @@ export default function NewRequest() {
         </div>
         <div className="text-center">
           <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
-            送信
+            Envoyer
           </button>
         </div>
       </form>

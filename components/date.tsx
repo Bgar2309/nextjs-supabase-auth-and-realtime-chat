@@ -4,7 +4,7 @@ type Props = {
 
 export default function DateFormatter({ timestamp }: Props) {
   const date = new Date(timestamp)
-  var jstDate = date.toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" })
+  var jstDate = date.toLocaleString("fr-FR", { timeZone: "Europe/Paris" })
 
   return (
     <>
