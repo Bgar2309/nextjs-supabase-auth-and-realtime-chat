@@ -7,19 +7,25 @@ import { useEffect, useRef } from 'react'
 
 export default function LoginPage() {
   const router = useRouter()
-  const supabaseRef = useRef(createPagesBrowserClient())
+  const supabaseRef = useRef<ReturnType<typeof createPagesBrowserClient> | null>(null)
 
   useEffect(() => {
-    const checkSession = async () => {
-      const {
-        data: { session },
-      } = await supabaseRef.current.auth.getSession()
-      if (session) {
-        router.replace('/profile')
+    if (
+      process.env.NEXT_PUBLIC_SUPABASE_URL &&
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    ) {
+      supabaseRef.current = createPagesBrowserClient()
+      const checkSession = async () => {
+        const {
+          data: { session },
+        } = await supabaseRef.current!.auth.getSession()
+        if (session) {
+          router.replace('/profile')
+        }
       }
-    }
 
-    checkSession()
+      checkSession()
+    }
   }, [router])
 
   return (
