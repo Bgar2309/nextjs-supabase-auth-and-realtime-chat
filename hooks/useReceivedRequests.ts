@@ -9,7 +9,13 @@ export default function useReceivedRequests() {
   useEffect(() => {
     const fetchRequests = async () => {
       setLoading(true)
-      const { data: { user } } = await supabase.auth.getUser()
+      if (!supabase) {
+        setLoading(false)
+        return
+      }
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
       if (!user) {
         setLoading(false)
         return

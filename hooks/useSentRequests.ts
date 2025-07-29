@@ -6,7 +6,13 @@ export default function useSentRequests() {
 
   useEffect(() => {
     const fetchRequests = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
+      if (!supabase) {
+        setRequests([])
+        return
+      }
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
       if (!user) return
       const { data, error } = await supabase
         .from('requests')
