@@ -3,11 +3,32 @@ import useReceivedRequests from '@/hooks/useReceivedRequests'
 import DateFormatter from '@/components/date'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function ReceivedRequestsPage() {
   const { data: requests, error, loading } = useReceivedRequests()
   const supabase = createClientComponentClient()
   const router = useRouter()
+
+  const showToast = (message: string) => {
+    alert(message)
+  }
+
+  useEffect(() => {
+    let subscription: any
+    const subscribe = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
+      subscription = supabase
+        .from(`requests:receiver_id=eq.${user.id}`)
+        .on('INSERT', () => showToast('Nouvelle demande reçue'))
+        .subscribe()
+    }
+    subscribe()
+    return () => {
+      if (subscription) supabase.removeChannel(subscription)
+    }
+  }, [])
 
   const updateStatus = async (id: string, status: 'answered' | 'done') => {
     await supabase.from('requests').update({ status }).eq('id', id)
