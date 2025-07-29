@@ -1,5 +1,6 @@
 import './globals.css'
 import SupabaseListener from '@/components/supabaseListener'
+import Sidebar from '@/components/sidebar'
 
 export default function RootLayout({
   children,
@@ -12,7 +13,9 @@ export default function RootLayout({
         <div>
           <SupabaseListener />
         </div>
-        <main>{children}</main>
+        <Sidebar>
+          <main>{children}</main>
+        </Sidebar>
       </body>
     </html>
   )
